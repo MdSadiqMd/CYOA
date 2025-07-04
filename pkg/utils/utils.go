@@ -7,11 +7,12 @@ import (
 	"github.com/MdSadiqMd/CYOA/pkg/schema"
 )
 
-func JsonStory(r io.Reader) (story schema.Story, error error) {
-	d := json.NewDecoder(r)
-	var Story schema.Story
-	if err := d.Decode(&story); err != nil {
+func JsonStory(r io.Reader) (schema.Story, error) {
+	var story schema.Story
+	decoder := json.NewDecoder(r)
+	err := decoder.Decode(&story)
+	if err != nil {
 		return nil, err
 	}
-	return Story, nil
+	return story, nil
 }
